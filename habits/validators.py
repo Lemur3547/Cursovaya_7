@@ -21,8 +21,18 @@ class ExecutionTimeValidator:
         pass
 
     def __call__(self, value, *args, **kwargs):
-        if value['execution_time'] > 120:
-            raise ValidationError('Время на выполнение привычки не должно превышать 120 секунд')
+        if value.get('is_pleasant'):
+            if value.get('execution_time'):
+                raise ValidationError("Для приятной привычки не требуется длительность (execution_time)")
+        else:
+            if value.get('execution_time'):
+                if value.get('execution_time') > 120:
+                    raise ValidationError('Время на выполнение привычки не должно превышать 120 секунд')
+                if value.get('execution_time') < 1:
+                    raise ValidationError(
+                        f'Время на выполнение привычки не не может быть {value["execution_time"]} секунд')
+            else:
+                raise ValidationError('Заполните поле execution_time')
 
 
 class IsAssociatedHabitPleasant:
@@ -40,7 +50,27 @@ class IntervalValidator:
         pass
 
     def __call__(self, value, *args, **kwargs):
-        if value['interval'] > 7:
-            raise ValidationError('Нельзя выполнять привычку реже, чем раз в 7 дней')
-        if value['interval'] < 1:
-            raise ValidationError(f'Невозможно выполнять привычку раз в {value["interval"]} дней')
+        if value.get('is_pleasant'):
+            if value.get('interval'):
+                raise ValidationError("Для приятной привычки не требуется интервал (interval)")
+        else:
+            if value.get('interval'):
+                if value.get('interval') > 7:
+                    raise ValidationError('Нельзя выполнять привычку реже, чем раз в 7 дней')
+                if value.get('interval') < 1:
+                    raise ValidationError(f'Невозможно выполнять привычку раз в {value["interval"]} дней')
+            else:
+                raise ValidationError('Заполните поле interval')
+
+
+class TimeValidator:
+    def __init__(self):
+        pass
+
+    def __call__(self, value, *args, **kwargs):
+        if value.get('is_pleasant'):
+            if value.get('time'):
+                raise ValidationError("Для приятной привычки не требуется время (time)")
+        else:
+            if not value.get('time'):
+                raise ValidationError("Заполните поле time")
