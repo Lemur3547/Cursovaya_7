@@ -17,3 +17,10 @@ class Habit(models.Model):
     reward = models.CharField(max_length=255, verbose_name='Вознаграждение', **NULLABLE)
     execution_time = models.SmallIntegerField(verbose_name='Время на выполнение (в секундах)')
     is_public = models.BooleanField(verbose_name='Публичная привычка')
+
+    def __str__(self):
+        return self.action
+
+    class Meta:
+        verbose_name = 'Привычка'
+        verbose_name_plural = 'Привычки'
