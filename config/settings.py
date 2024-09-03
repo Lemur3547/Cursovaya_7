@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'habits',
     'users',
     'rest_framework_simplejwt',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,8 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': True
 }
+
+# Celery Configuration Options
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
