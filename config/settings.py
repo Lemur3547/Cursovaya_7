@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'users',
     'rest_framework_simplejwt',
     'django_celery_beat',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -154,3 +157,12 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 
 TELEGRAM_URL = 'https://api.telegram.org/bot'
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+
+CORS_ALLOWED_ORIGINS = [
+    "https://read-only.example.com",
+    "https://read-and-write.example.com",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://read-and-write.example.com",
+]
