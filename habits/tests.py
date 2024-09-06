@@ -160,7 +160,7 @@ class HabitTestCase(APITestCase):
             }
         )
         response = self.client.patch(
-            reverse('habits:habit_update', args=(self.habit.pk+1,)),
+            reverse('habits:habit_update', args=(self.habit.pk + 1,)),
             data={
                 "place": "upd place",
                 "time": "00:00",
@@ -177,7 +177,7 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.json(),
             {
-                "id": self.habit.pk+1,
+                "id": self.habit.pk + 1,
                 "place": "upd place",
                 "time": "00:00:00",
                 "action": "upd action",
@@ -207,7 +207,7 @@ class HabitTestCase(APITestCase):
             }
         )
         response = self.client.patch(
-            reverse('habits:habit_update', args=(self.habit.pk+1,)),
+            reverse('habits:habit_update', args=(self.habit.pk + 1,)),
             data={
                 "place": "upd place",
                 "time": "23:59:59",
@@ -224,7 +224,7 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.json(),
             {
-                "id": self.habit.pk+1,
+                "id": self.habit.pk + 1,
                 "place": "upd place",
                 "time": "23:59:59",
                 "action": "upd action",
@@ -254,7 +254,7 @@ class HabitTestCase(APITestCase):
             }
         )
         response = self.client.delete(
-            reverse('habits:habit_delete', args=(self.habit.pk+1,)),
+            reverse('habits:habit_delete', args=(self.habit.pk + 1,)),
         )
         self.assertEqual(
             response.status_code,
